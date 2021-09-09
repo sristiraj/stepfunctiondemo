@@ -1,0 +1,46 @@
+{
+  "Comment": "A Hello World example of the Amazon States Language using a Pass state",
+  "StartAt": "gluejobs",
+  "States": {
+    "gluejobs": {
+      "Type": "Parallel",
+      "End": true,
+      "Branches": [
+        {
+          "StartAt": "LookupAddress",
+          "States": {
+            "LookupAddress": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::glue:startJobRun.sync",
+              "Parameters": {
+                "JobName": "FTPDownload",
+                "Arguments": {
+                  "--PARAM1": "val1",
+                  "--PARAM2": "val2"
+                }
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "LookupPhone",
+          "States": {
+            "LookupPhone": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::glue:startJobRun.sync",
+              "Parameters": {
+                "JobName": "FTPDownload",
+                "Arguments": {
+                  "--PARAM1": "val21",
+                  "--PARAM2": "val22"
+                }
+              },
+              "End": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}
